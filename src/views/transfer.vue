@@ -14,18 +14,17 @@
                             <div class="row my-3">
                                 <div class="input-group col-11 mx-auto" id="searchreceiver">
                                     <div class="input-group-prepend">
-                                        <button class="btn"><img src="../assets/search.png" alt=""></button>
+                                        <button class="btn"><img src="../assets/search.png" alt="icon"></button>
                                     </div>
-                                    <input type="search" class="form-control border border-0 bg-transparent" placeholder="Search receiver here">
+                                    <input type="search" class="form-control border border-0 bg-transparent" placeholder="Search receiver here" v-on:keyup.enter="setSearch">
                                 </div>
                             </div>
-                            <nav class="navbar px-2 mx-4 shadow-sm mb-3">
-                                <img src="../assets/christian-buehner-DItYlc26zVI-unsplash 1.png" width="50px" alt="">
-                                <div class="col-auto mr-auto">
-                                    <h6 class="m-0">Samuel Sushi</h6>
-                                    <small>+62 895 0520 6416</small>
+                            <orderBy />
+                            <div class="list-receiver">
+                                <div v-for="receiver in receivers" :key="receiver.id">
+                                    <receiverCard :item="receiver" />
                                 </div>
-                            </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,16 +36,47 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import navbar from '../components/navbar'
 import sidebar from '../components/sidebar'
 import footbar from '../components/footbar'
+import orderBy from '../components/orderBy'
+import receiverCard from '../components/receiverCard'
 
 export default {
   name: 'transfer',
+  props: {
+    item: {
+      type: Object
+    }
+  },
   components: {
     navbar,
     sidebar,
-    footbar
+    footbar,
+    orderBy,
+    receiverCard
+  },
+  methods: {
+    setSearch (e) {
+      this.handleSearch(e.target.value)
+    },
+    ...mapActions(['getReceivers', 'handleSearch'])
+  },
+  computed: {
+    ...mapGetters({
+      receivers: 'receivers'
+    })
+  },
+  mounted () {
+    this.getReceivers()
   }
 }
 </script>
+
+<style scoped>
+.list-receiver {
+    overflow: auto;
+    height: 300px;
+}
+</style>

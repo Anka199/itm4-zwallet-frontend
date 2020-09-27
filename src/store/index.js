@@ -14,7 +14,8 @@ export default new Vuex.Store({
     email: localStorage.getItem('email') || null,
     image: localStorage.getItem('image') || null,
     phoneNumber: localStorage.getItem('phoneNumber') || null,
-    resetId: localStorage.getItem('resetId') || null
+    resetId: localStorage.getItem('resetId') || null,
+    receivers: []
   },
   mutations: {
     setUser (state, payload) {
@@ -31,6 +32,15 @@ export default new Vuex.Store({
     },
     setResetId (state, id) {
       state.resetId = id
+    },
+    setReceiver (state, payload) {
+      state.receivers = payload
+    },
+    setReceiverByName (state, payload) {
+      state.receivers = payload
+    },
+    setReceiverByPhone (state, payload) {
+      state.receivers = payload
     }
   },
   actions: {
@@ -119,11 +129,66 @@ export default new Vuex.Store({
       localStorage.removeItem('email')
       localStorage.removeItem('image')
       localStorage.removeItem('phoneNumber')
+    },
+    getReceivers (context) {
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:4000/api/v1/receivers')
+          .then((res) => {
+            // console.log(res)
+            context.commit('setReceiver', res.data.result)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            // console.log(err)
+            reject(err)
+          })
+      })
+    },
+    getReceiversByName (context) {
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:4000/api/v1/receivers?sort=name')
+          .then((res) => {
+            // console.log(res)
+            context.commit('setReceiverByName', res.data.result)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    getReceiversByPhone (context) {
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:4000/api/v1/receivers?sort=phoneNumber')
+          .then((res) => {
+            context.commit('setReceiverByPhone', res.data.result)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    handleSearch (context, key) {
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:4000/api/v1/receivers?search=${key}`)
+          .then((res) => {
+            resolve(res.data.result)
+            context.commit('setReceiver', res.data.result)
+          })
+          .catch((err) => {
+            // console.log(err)
+            reject(err)
+          })
+      })
     }
   },
   getters: {
     isLogin (state) {
       return state.token !== null
+    },
+    receivers (state) {
+      return state.receivers
     },
     token (state) {
       return state.token
