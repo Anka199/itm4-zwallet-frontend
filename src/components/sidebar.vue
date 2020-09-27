@@ -13,13 +13,21 @@
         <button class="btn w-75 btn-success mb-5 mx-auto">Proifle</button>
     </div>
     <div class="row">
-        <button class="btn w-75 btn-success mt-5 mx-auto">Logout</button>
+        <button class="btn w-75 btn-success mt-5 mx-auto" @click="handleLogout">Logout</button>
     </div>
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  name: 'sidebar'
+  name: 'sidebar',
+  methods: {
+    ...mapActions(['logout']),
+    handleLogout () {
+      this.$router.go(0)
+      this.logout()
+    }
+  }
 }
 </script>
