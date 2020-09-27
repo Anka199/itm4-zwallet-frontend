@@ -18,25 +18,25 @@
                             <nav class="navbar rounded-pill shadow-sm mx-4 mb-4 p-0 px-3">
                                 <div class="col">
                                     <small class="text-muted m-0">First Name</small>
-                                    <h6>Anka</h6>
+                                    <h6>{{firstName}}</h6>
                                 </div>
                             </nav>
                             <nav class="navbar rounded-pill shadow-sm mx-4 mb-4 p-0 px-3">
                                 <div class="col">
                                     <small class="text-muted m-0">Last Name</small>
-                                    <h6>Abdullah</h6>
+                                    <h6>{{lastName}}</h6>
                                 </div>
                             </nav>
                             <nav class="navbar rounded-pill shadow-sm mx-4 mb-4 p-0 px-3">
                                 <div class="col">
                                     <small class="text-muted m-0">Verified E-mail</small>
-                                    <h6>ankabdullah@gmail.com</h6>
+                                    <h6>{{email}}</h6>
                                 </div>
                             </nav>
                             <nav class="navbar rounded-pill shadow-sm mx-4 mb-4 p-0 px-3">
                                 <div class="col">
                                     <small class="text-muted m-0">Phone Number</small>
-                                    <h6>+62 895 0510 6416</h6>
+                                    <h6>{{phoneNumber}}</h6>
                                 </div>
                                 <a href="" class="ml-auto">manage</a>
                             </nav>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import navbar from '../components/navbar'
 import sidebar from '../components/sidebar'
 import footbar from '../components/footbar'
@@ -61,6 +62,14 @@ export default {
     navbar,
     sidebar,
     footbar
+  },
+  computed: {
+    ...mapGetters({
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'email',
+      phoneNumber: 'phoneNumber'
+    })
   }
 }
 </script>

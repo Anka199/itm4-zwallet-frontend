@@ -12,34 +12,34 @@
                             <div id="box" class="shadow mx-auto">
                                 <div class="col-auto">
                                     <div class="row mt-5">
-                                        <img src="../assets/christian-buehner-DItYlc26zVI-unsplash 1.png" class="mx-auto" width="80px" id="photo"><br>
+                                        <img :src="image" class="mx-auto" width="80px" id="photo"><br>
                                     </div>
                                     <div class="row">
                                         <a href="" class="mx-auto mb-3"><img src="../assets/edit-2.png" alt=""><span class="ml-2 text-secondary">edit</span></a>
                                     </div>
-                                    <h5 class="text-center">Robert Chandler</h5>
-                                    <p class="text-center text-muted">+62 895 0510 6416</p>
+                                    <h5 class="text-center">{{firstName}}</h5>
+                                    <p class="text-center text-muted">{{phoneNumber}}</p>
                                     <div class="row">
                                         <div class="col-6 mx-auto">
-                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile">
+                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile" @click="goPersonal">
                                                 <nav class="navbar py-0">
                                                     <p class="m-0 my-auto">Personal Information</p>
                                                     <img src="../assets/arrow-left.png" class="my-auto ml-auto">
                                                 </nav>
                                             </button>
-                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile">
+                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile" @click="goChangePassword">
                                                 <nav class="navbar py-0">
                                                     <p class="m-0 my-auto">Change Password</p>
                                                     <img src="../assets/arrow-left.png" class="my-auto ml-auto">
                                                 </nav>
                                             </button>
-                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile">
+                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile" @click="goChangePin">
                                                 <nav class="navbar py-0">
                                                     <p class="m-0 my-auto">Change Pin</p>
                                                     <img src="../assets/arrow-left.png" class="my-auto ml-auto">
                                                 </nav>
                                             </button>
-                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile">
+                                            <button class="btn w-100 mb-3 shadow-sm" id="btnprofile" @click="handleLogout">
                                                 <nav class="navbar py-0">
                                                     <p class="m-0 my-auto">Logout</p>
                                                 </nav>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import navbar from '../components/navbar'
 import sidebar from '../components/sidebar'
 import footbar from '../components/footbar'
@@ -68,6 +69,37 @@ export default {
     navbar,
     sidebar,
     footbar
+  },
+  methods: {
+    ...mapActions(['logout']),
+    handleLogout () {
+      this.$router.go(0)
+      this.logout()
+    },
+    goPersonal () {
+      this.$router.push('/personal')
+    },
+    goChangePassword () {
+      this.$router.push('/changepassword')
+    },
+    goChangePin () {
+      this.$router.push('/changepin')
+    }
+  },
+  computed: {
+    ...mapGetters({
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'email',
+      image: 'image',
+      phoneNumber: 'phoneNumber'
+    })
   }
 }
 </script>
+<style scoped>
+button:hover {
+    cursor: pointer;
+    background-color: #6379F4;
+}
+</style>

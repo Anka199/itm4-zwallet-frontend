@@ -9,12 +9,22 @@ export default new Vuex.Store({
   state: {
     user: {},
     token: localStorage.getItem('token') || null,
+    firstName: localStorage.getItem('firstName') || null,
+    lastName: localStorage.getItem('lastName') || null,
+    email: localStorage.getItem('email') || null,
+    image: localStorage.getItem('image') || null,
+    phoneNumber: localStorage.getItem('phoneNumber') || null,
     resetId: localStorage.getItem('resetId') || null
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
       state.token = payload.token
+      state.firstName = payload.firstName
+      state.lastName = payload.lastName
+      state.email = payload.email
+      state.image = payload.image
+      state.phoneNumber = payload.phoneNumber
     },
     setToken (state, payload) {
       state.token = payload
@@ -51,6 +61,11 @@ export default new Vuex.Store({
           .then((res) => {
             setex.commit('setUser', res.data.result)
             localStorage.setItem('token', this.state.token)
+            localStorage.setItem('firstName', this.state.firstName)
+            localStorage.setItem('lastName', this.state.lastName)
+            localStorage.setItem('email', this.state.email)
+            localStorage.setItem('image', this.state.image)
+            localStorage.setItem('phoneNumber', this.state.phoneNumber)
             resolve(res.data.result[0])
           })
           .catch((err) => {
@@ -99,6 +114,11 @@ export default new Vuex.Store({
     },
     logout () {
       localStorage.removeItem('token')
+      localStorage.removeItem('firstName')
+      localStorage.removeItem('lastName')
+      localStorage.removeItem('email')
+      localStorage.removeItem('image')
+      localStorage.removeItem('phoneNumber')
     }
   },
   getters: {
@@ -107,6 +127,21 @@ export default new Vuex.Store({
     },
     token (state) {
       return state.token
+    },
+    firstName (state) {
+      return state.firstName
+    },
+    lastName (state) {
+      return state.lastName
+    },
+    email (state) {
+      return state.email
+    },
+    image (state) {
+      return state.image
+    },
+    phoneNumber (state) {
+      return state.phoneNumber
     }
   },
   modules: {
