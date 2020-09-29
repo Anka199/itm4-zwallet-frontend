@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
     <div class="container-fluid p-0 bg-light">
         <navbar/>
         <div class="container p-0">
@@ -8,24 +8,24 @@
                     <sidebar />
                 </div>
                 <div class="col-9">
-                    <div class="row m-0">
-                        <div id="box" class="shadow mx-auto">
-                            <h6 class="ml-4 mt-3">Search Receiver</h6>
-                            <div class="row my-3">
-                                <div class="input-group col-11 mx-auto" id="searchreceiver">
-                                    <div class="input-group-prepend">
-                                        <button class="btn"><img src="../assets/search.png" alt="icon"></button>
-                                    </div>
-                                    <input type="search" class="form-control border border-0 bg-transparent" placeholder="Search receiver here" v-on:keyup.enter="setSearch">
-                                </div>
-                            </div>
-                            <orderBy />
-                            <div class="list-receiver">
-                                <div v-for="receiver in receivers" :key="receiver.id">
-                                    <receiverCard :item="receiver" />
-                                </div>
-                            </div>
+                  <div class="row m-0">
+                    <div id="box" class="shadow mx-auto">
+                        <h6 class="ml-4 mt-3">Search Receiver</h6>
+                        <div class="row my-3">
+                          <div class="input-group col-11 mx-auto" id="searchreceiver">
+                              <div class="input-group-prepend">
+                                  <button class="btn"><img src="../assets/search.png" alt="icon"></button>
+                              </div>
+                              <input type="search" class="form-control border border-0 bg-transparent" placeholder="Search receiver here" v-on:keyup.enter="setSearch">
+                          </div>
                         </div>
+                        <orderBy />
+                        <div class="list-receiver">
+                          <div v-for="receiver in receivers" :key="receiver.id">
+                              <receiverCard :item="receiver" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .list-receiver {
-    overflow: auto;
-    height: 300px;
+  overflow: auto;
+  height: 300px;
 }
 </style>

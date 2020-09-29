@@ -56,16 +56,16 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .btn-dropdown {
-    border: 3px solid #6379F4;
-    color: #212227;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: #212227;
 }
 .btn-dropdown:hover {
-    background-color: #6379F4;
-    color: aliceblue;
+  background-color: #6379F4;
+  color: aliceblue;
 }
 .dropdown-item {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>

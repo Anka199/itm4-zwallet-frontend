@@ -63,7 +63,6 @@ button {
   text-align: center;
 }
 button:hover {
-  background-color: #6379F4;
-  color: aliceblue;
+  background-color: #a0aefc;
 }
 </style>

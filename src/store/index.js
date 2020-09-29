@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     token: localStorage.getItem('token') || null,
+    userId: localStorage.getItem('userId') || null,
     firstName: localStorage.getItem('firstName') || null,
     lastName: localStorage.getItem('lastName') || null,
     email: localStorage.getItem('email') || null,
@@ -21,11 +22,15 @@ export default new Vuex.Store({
     setUser (state, payload) {
       state.user = payload
       state.token = payload.token
+      state.userId = payload.id
       state.firstName = payload.firstName
       state.lastName = payload.lastName
       state.email = payload.email
       state.image = payload.image
       state.phoneNumber = payload.phoneNumber
+    },
+    setImage (state, payload) {
+      state.image = payload
     },
     setToken (state, payload) {
       state.token = payload
@@ -71,6 +76,7 @@ export default new Vuex.Store({
           .then((res) => {
             setex.commit('setUser', res.data.result)
             localStorage.setItem('token', this.state.token)
+            localStorage.setItem('userId', this.state.userId)
             localStorage.setItem('firstName', this.state.firstName)
             localStorage.setItem('lastName', this.state.lastName)
             localStorage.setItem('email', this.state.email)
@@ -88,6 +94,31 @@ export default new Vuex.Store({
         axios.post('http://localhost:4000/api/v1/users/register', payload)
           .then((res) => {
             resolve(res.data.result[0])
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    uploadImg (setex, payload) {
+      return new Promise((resolve, reject) => {
+        axios.patch('http://localhost:4000/api/v1/users/uploadImg/' + payload.id, payload.form)
+          .then((res) => {
+            // setex.commit('setImage')
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    getUserById (setex, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get('http://localhost:4000/api/v1/users/' + payload.id)
+          .then((res) => {
+            setex.commit('setImage', res.data.result[0].image)
+            localStorage.setItem('image', res.data.result[0].image)
+            resolve(res.data.result[0].image)
           })
           .catch((err) => {
             reject(err)
@@ -126,6 +157,9 @@ export default new Vuex.Store({
       localStorage.removeItem('token')
       localStorage.removeItem('firstName')
       localStorage.removeItem('lastName')
+      localStorage.removeItem('name')
+      localStorage.removeItem('username')
+      localStorage.removeItem('userId')
       localStorage.removeItem('email')
       localStorage.removeItem('image')
       localStorage.removeItem('phoneNumber')
@@ -192,6 +226,9 @@ export default new Vuex.Store({
     },
     token (state) {
       return state.token
+    },
+    userId (state) {
+      return state.userId
     },
     firstName (state) {
       return state.firstName

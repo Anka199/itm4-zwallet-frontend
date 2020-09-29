@@ -4,7 +4,7 @@ import Login from '../views/Auth/Login/Login.vue'
 import Register from '../views/Auth/Register/Register.vue'
 import ResetPassword from '../views/Auth/ResetPassword/ResetPassword.vue'
 import Home from '../views/Home.vue'
-import Auth from '../views/Auth.vue'
+import Dashboard from '../views/dashboard.vue'
 import addphone from '../views/addphone.vue'
 import changepassword from '../views/changepassword.vue'
 import changepin from '../views/changepin.vue'
@@ -12,6 +12,7 @@ import confirmation from '../views/confirmation.vue'
 import managephone from '../views/managephone.vue'
 import personal from '../views/personal.vue'
 import profile from '../views/profile.vue'
+import editImage from '../views/editImage.vue'
 import status from '../views/status.vue'
 import topup from '../views/topup.vue'
 import transfer from '../views/transfer.vue'
@@ -44,9 +45,9 @@ const routes = [{
   meta: { requiresAuth: true }
 },
 {
-  path: '/auth',
-  name: 'Auth',
-  component: Auth,
+  path: '/dashboard',
+  name: 'Dashboard',
+  component: Dashboard,
   meta: { requiresAuth: true }
 },
 {
@@ -89,6 +90,12 @@ const routes = [{
   path: '/profile',
   name: 'profile',
   component: profile,
+  meta: { requiresAuth: true }
+},
+{
+  path: '/editImage',
+  name: 'editImage',
+  component: editImage,
   meta: { requiresAuth: true }
 },
 {

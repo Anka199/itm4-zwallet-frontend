@@ -12,12 +12,12 @@
                             <div id="box" class="shadow mx-auto">
                                 <div class="col-auto">
                                     <div class="row mt-5">
-                                        <img :src="image" class="mx-auto" width="80px" id="photo"><br>
+                                        <img :src="image" class="mx-auto" width="100px" id="photo"><br>
                                     </div>
                                     <div class="row">
-                                        <a href="" class="mx-auto mb-3"><img src="../assets/edit-2.png" alt=""><span class="ml-2 text-secondary">edit</span></a>
+                                      <router-link to="/editImage" class="mx-auto mb-3"><img src="../assets/edit-2.png" alt=""><span class="ml-2 text-secondary">edit</span></router-link>
                                     </div>
-                                    <h5 class="text-center">{{firstName}}</h5>
+                                    <h5 class="text-center mb-0">{{firstName}}</h5>
                                     <p class="text-center text-muted">{{phoneNumber}}</p>
                                     <div class="row">
                                         <div class="col-6 mx-auto">
@@ -65,6 +65,11 @@ import footbar from '../components/footbar'
 
 export default {
   name: 'profile',
+  // data () {
+  //   return {
+  //     File: ''
+  //   }
+  // },
   components: {
     navbar,
     sidebar,
@@ -88,6 +93,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      userId: 'userId',
       firstName: 'firstName',
       lastName: 'lastName',
       email: 'email',
@@ -99,7 +105,8 @@ export default {
 </script>
 <style scoped>
 button:hover {
-    cursor: pointer;
-    background-color: #6379F4;
+  cursor: pointer;
+  background-color: #6379F4;
+  font-weight: bolder;
 }
 </style>
