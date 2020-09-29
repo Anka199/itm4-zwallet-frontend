@@ -2,31 +2,31 @@
     <div>
     <div class="row">
         <button class="btn w-75 my-5 mx-auto" @click="goHome">
-          <img src="../assets/sidebar/grid.svg" class="mr-4" alt="icon" width="25px">
+          <img src="../assets/sidebar/grid.svg" class="mr-1" alt="icon" width="25px">
           Dashboard
         </button>
     </div>
     <div class="row">
         <button class="btn w-75 mb-5 mx-auto" @click="goTransfer">
-          <img src="../assets/sidebar/arrow-up.svg" class="mr-4" alt="icon" width="25px">
+          <img src="../assets/sidebar/arrow-up.svg" class="mr-2" alt="icon" width="25px">
           Transfer
         </button>
     </div>
     <div class="row">
         <button class="btn w-75 mb-5 mx-auto" @click="goTopUp">
-          <img src="../assets/sidebar/plus.svg" class="mr-4" alt="icon" width="25px">
+          <img src="../assets/sidebar/plus.svg" class="mr-2" alt="icon" width="25px">
           Top Up
         </button>
     </div>
     <div class="row">
         <button class="btn w-75 mb-5 mx-auto" @click="goProfile">
-          <img src="../assets/sidebar/user.svg" class="mr-4" alt="icon" width="25px">
+          <img src="../assets/sidebar/user.svg" class="mr-2" alt="icon" width="25px">
           Profile
         </button>
     </div>
     <div class="row">
         <button class="btn w-75 mt-5 mx-auto" @click="handleLogout">
-          <img src="../assets/sidebar/log-out.svg" class="mr-4" alt="icon" width="25px">
+          <img src="../assets/sidebar/log-out.svg" class="mr-2" alt="icon" width="25px">
           Logout
         </button>
     </div>

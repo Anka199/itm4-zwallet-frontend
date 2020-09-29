@@ -17,7 +17,7 @@
                                     <div class="row">
                                       <router-link to="/editImage" class="mx-auto mb-3"><img src="../assets/edit-2.png" alt=""><span class="ml-2 text-secondary">edit</span></router-link>
                                     </div>
-                                    <h5 class="text-center mb-0">{{firstName}}</h5>
+                                    <h5 class="text-center mb-0">{{username}}</h5>
                                     <p class="text-center text-muted">{{phoneNumber}}</p>
                                     <div class="row">
                                         <div class="col-6 mx-auto">
@@ -96,6 +96,7 @@ export default {
       userId: 'userId',
       firstName: 'firstName',
       lastName: 'lastName',
+      username: 'username',
       email: 'email',
       image: 'image',
       phoneNumber: 'phoneNumber'
