@@ -16,8 +16,11 @@
                             </div>
                             <div class="row">
                                 <form action="" class="col-6 mx-auto mt-5">
-                                    <div class="input-group mb-3 border-bottom">
-                                        <input type="number" class="form-control" maxlength="6">
+                                    <div class="vue-pincode-input-wrapper mb-5">
+                                        <PincodeInput
+                                            v-model="code"
+                                            :length="6"
+                                        />
                                     </div>
                                     <div class="row">
                                         <button class="btn btn-primary w-75 mx-auto" style="background: #6379F4;">Continue</button>
@@ -35,6 +38,7 @@
 </template>
 
 <script>
+import PincodeInput from 'vue-pincode-input'
 import navbar from '../components/navbar'
 import sidebar from '../components/sidebar'
 import footbar from '../components/footbar'
@@ -42,9 +46,18 @@ import footbar from '../components/footbar'
 export default {
   name: 'changepin',
   components: {
+    PincodeInput,
     navbar,
     sidebar,
     footbar
-  }
+  },
+  data: () => ({
+    code: ''
+  })
 }
 </script>
+<style scoped>
+.vue-pincode-input-wrapper {
+  padding: 0px 35px;
+}
+</style>
