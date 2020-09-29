@@ -19,10 +19,9 @@
                               <input type="search" class="form-control border border-0 bg-transparent" placeholder="Search receiver here" v-on:keyup.enter="setSearch">
                           </div>
                         </div>
-                        <orderBy />
                         <div class="list-receiver">
                           <div v-for="receiver in receivers" :key="receiver.id">
-                              <receiverCard :item="receiver" />
+                              <receiverCard :item="receiver" @event-delete="handleDelete" />
                           </div>
                         </div>
                       </div>
@@ -40,7 +39,6 @@ import { mapActions, mapGetters } from 'vuex'
 import navbar from '../components/navbar'
 import sidebar from '../components/sidebar'
 import footbar from '../components/footbar'
-import orderBy from '../components/orderBy'
 import receiverCard from '../components/receiverCard'
 
 export default {
@@ -50,18 +48,33 @@ export default {
       type: Object
     }
   },
+  data () {
+    return {
+      id: null
+    }
+  },
   components: {
     navbar,
     sidebar,
     footbar,
-    orderBy,
     receiverCard
   },
   methods: {
     setSearch (e) {
       this.handleSearch(e.target.value)
     },
-    ...mapActions(['getReceivers', 'handleSearch'])
+    handleDelete (id) {
+      this.deleteReceiver(id)
+        .then(() => {
+          this.$toast.success('Delete Success')
+          this.$router.go(0)
+        })
+        .catch((err) => {
+          this.$toast.error(err.response.data.result)
+        })
+      this.getReceivers()
+    },
+    ...mapActions(['getReceivers', 'handleSearch', 'deleteReceiver'])
   },
   computed: {
     ...mapGetters({
@@ -77,6 +90,7 @@ export default {
 <style scoped>
 .list-receiver {
   overflow: auto;
-  height: 300px;
+  height: 330px;
+  margin-top: 30px;
 }
 </style>

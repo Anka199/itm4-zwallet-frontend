@@ -49,32 +49,32 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    interceptorsResponse (setex) {
+    interceptorsResponse (context) {
       axios.interceptors.response.use(function (response) {
         return response
       }, function (error) {
         console.log(error.response.data.result)
         localStorage.removeItem('token')
-        setex.commit('setToken', null)
+        context.commit('setToken', null)
         router.push('/login')
         // alert(error.response.data.result.message)
         return Promise.reject(error)
       })
     },
-    interceptorsRequest (setex) {
+    interceptorsRequest (context) {
       console.log('interse')
       axios.interceptors.request.use(function (config) {
-        config.headers.Authorization = `Bearer ${setex.state.token}`
+        config.headers.Authorization = `Bearer ${context.state.token}`
         return config
       }, function (error) {
         return Promise.reject(error)
       })
     },
-    login (setex, payload) {
+    login (context, payload) {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:4000/api/v1/users/login', payload)
           .then((res) => {
-            setex.commit('setUser', res.data.result)
+            context.commit('setUser', res.data.result)
             localStorage.setItem('token', this.state.token)
             localStorage.setItem('userId', this.state.userId)
             localStorage.setItem('firstName', this.state.firstName)
@@ -89,7 +89,7 @@ export default new Vuex.Store({
           })
       })
     },
-    register (setex, payload) {
+    register (context, payload) {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:4000/api/v1/users/register', payload)
           .then((res) => {
@@ -100,11 +100,10 @@ export default new Vuex.Store({
           })
       })
     },
-    uploadImg (setex, payload) {
+    uploadImg (context, payload) {
       return new Promise((resolve, reject) => {
         axios.patch('http://localhost:4000/api/v1/users/uploadImg/' + payload.id, payload.form)
           .then((res) => {
-            // setex.commit('setImage')
             resolve(res.data.result)
           })
           .catch((err) => {
@@ -112,11 +111,11 @@ export default new Vuex.Store({
           })
       })
     },
-    getUserById (setex, payload) {
+    getUserById (context, payload) {
       return new Promise((resolve, reject) => {
         axios.get('http://localhost:4000/api/v1/users/' + payload.id)
           .then((res) => {
-            setex.commit('setImage', res.data.result[0].image)
+            context.commit('setImage', res.data.result[0].image)
             localStorage.setItem('image', res.data.result[0].image)
             resolve(res.data.result[0].image)
           })
@@ -125,12 +124,12 @@ export default new Vuex.Store({
           })
       })
     },
-    forgotPassword (setex, payload) {
+    forgotPassword (context, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:4000/api/v1/users/forgotpassword', payload)
           .then((res) => {
-            setex.commit('setResetId', res.data.result)
+            context.commit('setResetId', res.data.result)
             localStorage.setItem('resetId', this.state.resetId)
             console.log(res.data.message)
             resolve(res)
@@ -140,7 +139,7 @@ export default new Vuex.Store({
           })
       })
     },
-    resetPassword (setex, payload) {
+    resetPassword (context, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {
         axios.patch(`http://localhost:4000/api/v1/users/resetpassword/${this.state.resetId}`, payload)
@@ -196,6 +195,17 @@ export default new Vuex.Store({
         axios.get('http://localhost:4000/api/v1/receivers?sort=phoneNumber')
           .then((res) => {
             context.commit('setReceiverByPhone', res.data.result)
+            resolve(res.data.result)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
+    },
+    deleteReceiver (context, id) {
+      return new Promise((resolve, reject) => {
+        axios.delete('http://localhost:4000/api/v1/receivers/' + id)
+          .then((res) => {
             resolve(res.data.result)
           })
           .catch((err) => {

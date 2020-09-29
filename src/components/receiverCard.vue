@@ -1,8 +1,11 @@
 <template>
     <nav class="navbar px-2 mx-4 shadow-sm mb-3">
         <img :src="item.image" width="50px" alt="img">
-        <div class="col-auto mr-auto">
-            <h6 class="m-0">{{item.name}}</h6>
+        <div class="col mr">
+            <div class="d-flex justify-content-between">
+              <h6 class="m-0">{{item.name}}</h6>
+              <i class="fa fa-trash" @click="$emit('event-delete', item.id)"></i>
+            </div>
             <small>{{item.phoneNumber}}</small>
         </div>
     </nav>
@@ -30,3 +33,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+i {
+  font-size: 18px;
+  color: red;
+}
+i:hover {
+  cursor: pointer;
+  font-size: 20px;
+}
+</style>
