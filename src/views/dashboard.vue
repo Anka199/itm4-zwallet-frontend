@@ -12,20 +12,20 @@
               <p>+62 813-9387-7946</p>
             </div>
             <div>
-              <button class="btn-transfer"><i class="fas fa-arrow-up mr-2 ml-3"></i>Transfer</button>
-              <button class="btn-top-up"><i class="fas fa-plus mr-2 ml-3"></i>Top Up</button>
+              <button class="btn-transfer"><i class="fa fa-arrow-up mr-2 ml-3"></i>Transfer</button>
+              <button class="btn-top-up"><i class="fa fa-plus mr-2 ml-3"></i>Top Up</button>
             </div>
           </div>
         </div>
         <div class="box-income">
           <div class="income-expense">
             <div class="income">
-              <p class="green"><i class="fas fa-arrow-down"></i></p>
+              <p class="green"><i class="fa fa-arrow-down"></i></p>
               <p>Income</p>
               <p>Rp2.120.000</p>
             </div>
             <div class="expense">
-              <p class="salmon"><i class="fas fa-arrow-up"></i></p>
+              <p class="salmon"><i class="fa fa-arrow-up"></i></p>
               <p>Expense</p>
               <p>Rp1.560.000</p>
             </div>

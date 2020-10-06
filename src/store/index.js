@@ -12,6 +12,7 @@ export default new Vuex.Store({
     userId: localStorage.getItem('userId') || null,
     firstName: localStorage.getItem('firstName') || null,
     lastName: localStorage.getItem('lastName') || null,
+    username: localStorage.getItem('username') || null,
     email: localStorage.getItem('email') || null,
     image: localStorage.getItem('image') || null,
     phoneNumber: localStorage.getItem('phoneNumber') || null,
@@ -25,6 +26,7 @@ export default new Vuex.Store({
       state.userId = payload.id
       state.firstName = payload.firstName
       state.lastName = payload.lastName
+      state.username = payload.username
       state.email = payload.email
       state.image = payload.image
       state.phoneNumber = payload.phoneNumber
@@ -79,6 +81,7 @@ export default new Vuex.Store({
             localStorage.setItem('userId', this.state.userId)
             localStorage.setItem('firstName', this.state.firstName)
             localStorage.setItem('lastName', this.state.lastName)
+            localStorage.setItem('username', this.state.username)
             localStorage.setItem('email', this.state.email)
             localStorage.setItem('image', this.state.image)
             localStorage.setItem('phoneNumber', this.state.phoneNumber)
@@ -156,7 +159,6 @@ export default new Vuex.Store({
       localStorage.removeItem('token')
       localStorage.removeItem('firstName')
       localStorage.removeItem('lastName')
-      localStorage.removeItem('name')
       localStorage.removeItem('username')
       localStorage.removeItem('userId')
       localStorage.removeItem('email')
@@ -245,6 +247,9 @@ export default new Vuex.Store({
     },
     lastName (state) {
       return state.lastName
+    },
+    username (state) {
+      return state.username
     },
     email (state) {
       return state.email

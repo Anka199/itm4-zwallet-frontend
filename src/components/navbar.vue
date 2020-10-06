@@ -5,7 +5,7 @@
         <div class="row ml-auto">
             <img :src=image width="50px" id="photo">
             <div class="col">
-                <h6 class="m-0 mt-1">{{firstName}}</h6>
+                <h6 class="m-0 mt-1">{{username}}</h6>
                 <small class="m-0">{{phoneNumber}}</small>
             </div>
         </div>
@@ -22,6 +22,7 @@ export default {
     ...mapGetters({
       firstName: 'firstName',
       lastName: 'lastName',
+      username: 'username',
       email: 'email',
       image: 'image',
       phoneNumber: 'phoneNumber'
